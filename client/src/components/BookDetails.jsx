@@ -1,5 +1,5 @@
 import { useState, useEffect, React } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import NavBar from './NavBar';
 import NotFound from './NotFound';
 import Loading from './Loading';
@@ -9,6 +9,7 @@ function BookDetails() {
     const { id } = useParams();
     const [book, setBook] = useState();
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     async function fetchBookDetails(id) {
         const request = await fetch("https://openlibrary.org/search.json?q=" + id, {
@@ -53,7 +54,11 @@ function BookDetails() {
     }
 
     useEffect(() => {
-        fetchBookDetails(id);
+        if ((/^OL\d+/).test(id)) { // If the URL ID is a valid OLID ("OL" + a number)
+            fetchBookDetails(id);
+        } else {
+            navigate("/details"); // displays the not found page
+        }
     }, []);
 
     return (

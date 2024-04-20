@@ -13,6 +13,14 @@ function SearchBooks({ formLabel }) {
     const [query, setQuery] = useState(criteria ? criteria : "");
     const [isFetchingResults, setIsFetchingResults] = useState(false);
 
+    function validateInput(input) {
+        if (!input.trim() || // To prevent users from submitting a search string with only whitespaces
+            !/^[a-zA-Z0-9\s'".,-]*$/.test(input)) { // Only allow input with alphanumeric characters and common symbols
+            return false;
+        }
+        return true;
+    }
+
     function SearchForm() {
         const [validated, setValidated] = useState(false);
         const [searchText, setSearchText] = useState(query);
@@ -39,14 +47,6 @@ function SearchBooks({ formLabel }) {
 
             setValidated(true);
         };
-
-        function validateInput(input) {
-            if (!input.trim() || // To prevent users from submitting a search string with only whitespaces
-                !/^[a-zA-Z0-9\s'".,-]*$/.test(input)) { // Only allow input with alphanumeric characters and common symbols
-                return false;
-            }
-            return true;
-        }
 
         return (
             <Form noValidate validated={validated} onSubmit={handleSubmit} className="form">
@@ -98,8 +98,13 @@ function SearchBooks({ formLabel }) {
 
     useEffect(() => {
         if (criteria) {
-            setIsFetchingResults(true);
-            fetchBooks(criteria);
+            if (validateInput(criteria)) {
+                setIsFetchingResults(true);
+                fetchBooks(criteria);
+            } else { // the criteria is invalid
+                setQuery(""); // clear the query
+                navigate("/search");
+            }
         }
     }, []);
 
