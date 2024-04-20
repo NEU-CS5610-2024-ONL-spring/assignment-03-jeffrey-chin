@@ -1,0 +1,6 @@
+/* Styling for the loading spinner */
+.loading-figure {
+    background-color: white;
+    text-align: center;
+    padding-top: 20px;
+}

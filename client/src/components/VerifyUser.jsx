@@ -1,8 +1,8 @@
-import "../style/appLayout.css";
-
 import { useEffect } from "react";
 import { useAuthToken } from "../AuthTokenContext";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
+import "../css/VerifyUser.css";
 
 export default function VerifyUser() {
   const navigate = useNavigate();
@@ -19,10 +19,15 @@ export default function VerifyUser() {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      const user = await data.json();
 
-      if (user.auth0Id) {
-        navigate("/app");
+      if (data.ok) {
+        const user = await data.json();
+
+        if (user.auth0Id) {
+          navigate("/");
+        }
+      } else {
+        return null;
       }
     }
 
@@ -31,5 +36,9 @@ export default function VerifyUser() {
     }
   }, [accessToken, navigate]);
 
-  return <div className="loading">Loading...</div>;
+  return (
+    <div className="loading-container">
+      <Loading message="Loading..." />
+    </div>
+  );
 }

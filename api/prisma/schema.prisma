@@ -5,17 +5,46 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "postgresql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
+// Model for a user, which includes the user's personal information and library.
 model User {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
-  auth0Id      String   @unique @default("")
-  name         String?
+  id               Int        @id @default(autoincrement())
+  email            String     @unique @db.VarChar(500)
+  auth0Id          String     @unique @default("") @db.VarChar(500)
+  name             String?    @db.VarChar(500)
+  userBooks        UserBook[]
+  age              Int?
+  gender           String?    @db.VarChar(500)
+  favoriteBook     String?    @db.VarChar(500)
+  favoriteAuthor   String?    @db.VarChar(500)
+  currentlyReading String?    @db.VarChar(500)
+}
+
+// Model for a book. Because book information is sourced from OpenLibrary, fields such as "title" and "authors" cannot be modified.
+model Book {
+  id            Int        @id @default(autoincrement())
+  title         String     @db.Text
+  authors       String     @db.Text
+  coverImageURL String     @db.Text
+  olid          String // The OpenLibrary ID of the book
+  bookUsers     UserBook[]
+}
+
+// Model for a user-book, which holds the book, the user that has the book in his/her library, and the user rating of the book.
+model UserBook {
+  id     Int  @id @default(autoincrement())
+  user   User @relation(fields: [userId], references: [id])
+  userId Int
+  book   Book @relation(fields: [bookId], references: [id])
+  bookId Int
+  rating Int?
 }

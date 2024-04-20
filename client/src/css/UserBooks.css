@@ -1,0 +1,26 @@
+/* Styling for the user books table on the homepage */
+.user-books-head th {
+    font-size: 16pt;
+    color: white;
+    font-weight: 500;
+}
+
+.user-books-body {
+    padding-top: 10px;
+}
+
+.user-books-body td {
+    min-width: 68px;
+    max-width: 300px;
+    word-break: break-word;
+}
+
+/* Hide title and author columns for mobile and tablet */
+@media (max-width: 800px) {
+    .user-books-body td:nth-child(2),
+    .user-books-body th:nth-child(2),
+    .user-books-body td:nth-child(3),
+    .user-books-body th:nth-child(3) {
+        display: none;
+    }
+}

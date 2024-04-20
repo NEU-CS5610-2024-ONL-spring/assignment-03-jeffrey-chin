@@ -1,0 +1,27 @@
+/* Styling for the search form */
+.form {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 30px;
+}
+
+/* To ensure borders for input fields are rounded on all corners */
+#age, #gender, #favoriteBook, #favoriteAuthor, #currentlyReading, #search-button {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+/* Decrease search bar padding for mobile and tablet */
+@media (max-width: 800px) {
+    .form {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}

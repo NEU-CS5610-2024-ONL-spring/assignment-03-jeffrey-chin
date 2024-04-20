@@ -1,0 +1,7 @@
+/* To center the loading figure on the verify-user page */
+.loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

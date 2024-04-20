@@ -1,0 +1,4 @@
+/* Styling for the "About you" table on the profile page */
+.user-info-table td {
+    word-break: break-word;
+}

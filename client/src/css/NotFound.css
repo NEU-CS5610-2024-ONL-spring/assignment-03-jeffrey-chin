@@ -1,0 +1,6 @@
+/* Styling for the Not Found page */
+.not-found-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}

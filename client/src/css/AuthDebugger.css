@@ -1,0 +1,12 @@
+/* Styling for the auth-debugger page */
+.auth-debugger {
+   display: flex;
+   flex-direction: column;
+}
+
+.access-token-section,
+.user-info-section {
+    word-wrap: break-word;
+    margin-top: 10px;
+    text-align: start;
+}

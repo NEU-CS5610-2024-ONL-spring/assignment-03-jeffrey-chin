@@ -1,0 +1,49 @@
+/* Styling for the profile page */
+section ul {
+    display: flex;
+    flex-flow: row wrap;
+    list-style-type: none;
+}
+
+section,
+section ul,
+.search-results *,
+.search-results-page *,
+.your-library * {
+    text-align: center;
+    justify-content: center;
+    padding: 5px;
+    margin: 5px;
+    word-wrap: break-word;
+}
+
+.your-library li,
+.search-results-page li {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+}
+
+section h2 {
+    font-size: 16pt;
+}
+
+li {
+    flex-basis: 100%;
+}
+
+/* Library/search results Layout for desktop */
+@media (min-width: 800px) {
+    .your-library li,
+    .search-results-page li {
+        flex-basis: 32.5%;
+    }
+}
+
+/* Limit cover image width for mobile and tablet */
+@media (max-width: 800px) {
+    .your-library img,
+    .search-results-page li img,
+    .search-results li img {
+        max-width: 80vw;
+    }
+}

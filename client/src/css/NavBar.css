@@ -1,0 +1,28 @@
+/* Styling for the NavBar */
+.menu {
+  background-color: black;
+  font-size: 12pt;
+  text-align: center;
+  width: 100vw;
+  position: sticky;
+  top: 0;
+  color: white;
+  z-index: 10; /* to position the menu above the search bar */
+}
+
+.menu-items {
+  display: flex;
+  list-style-type: none;
+  padding-left: 0;
+  align-items: center;
+  word-break: break-word; /* for longer usernames */
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
