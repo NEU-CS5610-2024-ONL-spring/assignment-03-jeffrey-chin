@@ -95,11 +95,12 @@ function BookItems({ list }) {
 }
 
 function Profile() {
-    const { isLoading, logout } = useAuth0();
+    const { isLoading } = useAuth0();
     const { userBooks } = useUserBooks();
     const { deleteUser } = useUser();
     const [showSearch, setShowSearch] = useState(false);
     const [showDeleteUser, setShowDeleteUser] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const handleCloseSearch = () => setShowSearch(false);
     const handleShowSearch = () => setShowSearch(true);
@@ -108,7 +109,7 @@ function Profile() {
     const handleShowDeleteUser = () => setShowDeleteUser(true);
 
     const handleDeleteUser = () => {
-        logout({ returnTo: window.location.origin });
+        setIsProcessing(true);
         deleteUser();
     }
 
@@ -161,7 +162,7 @@ function Profile() {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleCloseDeleteUser}>Cancel</Button>
-                    <Button onClick={handleDeleteUser}>Delete</Button>
+                    <Button onClick={handleDeleteUser} disabled={isProcessing}>Delete</Button>
                 </Modal.Footer>
             </Modal>
         </div>

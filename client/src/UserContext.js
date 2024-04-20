@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
-    const { isAuthenticated, loginWithRedirect } = useAuth0();
+    const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
     const { accessToken } = useAuthToken();
     const [user, setUser] = useState();
 
@@ -69,6 +69,7 @@ function UserProvider({ children }) {
 
             if (request.ok) {
                 const user = await request.json();
+                logout({ returnTo: window.location.origin });
                 return user;
             } else {
                 return null;
