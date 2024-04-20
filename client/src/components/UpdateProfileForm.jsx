@@ -3,13 +3,13 @@ import { useUser } from '../UserContext';
 import { Form, Button, InputGroup } from 'react-bootstrap';
 
 function UpdateProfileForm({ handleCloseUpdate }) {
-    const { updateUserInfo } = useUser();
+    const { user, updateUserInfo } = useUser();
     const [validated, setValidated] = useState(false);
-    const [age, setAge] = useState();
-    const [gender, setGender] = useState();
-    const [favoriteBook, setFavoriteBook] = useState();
-    const [favoriteAuthor, setFavoriteAuthor] = useState();
-    const [currentlyReading, setCurrentlyReading] = useState();
+    const [age, setAge] = useState(user.age);
+    const [gender, setGender] = useState(user.gender);
+    const [favoriteBook, setFavoriteBook] = useState(user.favoriteBook);
+    const [favoriteAuthor, setFavoriteAuthor] = useState(user.favoriteAuthor);
+    const [currentlyReading, setCurrentlyReading] = useState(user.currentlyReading);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,6 +33,7 @@ function UpdateProfileForm({ handleCloseUpdate }) {
                     type="number"
                     id="age"
                     placeholder="Your age..."
+                    defaultValue={age}
                     onChange={(e) => {
                         setAge(e.target.value);
                     }}
@@ -49,6 +50,7 @@ function UpdateProfileForm({ handleCloseUpdate }) {
                     type="text"
                     id="gender"
                     placeholder="Your gender..."
+                    defaultValue={gender}
                     onChange={(e) => {
                         setGender(e.target.value);
                     }}
@@ -64,6 +66,7 @@ function UpdateProfileForm({ handleCloseUpdate }) {
                     type="text"
                     id="favoriteBook"
                     placeholder="Your favorite book..."
+                    defaultValue={favoriteBook}
                     onChange={(e) => {
                         setFavoriteBook(e.target.value);
                     }}
@@ -79,6 +82,7 @@ function UpdateProfileForm({ handleCloseUpdate }) {
                     type="text"
                     id="favoriteAuthor"
                     placeholder="Your favorite author..."
+                    defaultValue={favoriteAuthor}
                     onChange={(e) => {
                         setFavoriteAuthor(e.target.value);
                     }}
@@ -94,6 +98,7 @@ function UpdateProfileForm({ handleCloseUpdate }) {
                     type="text"
                     id="currentlyReading"
                     placeholder="I'm currently reading..."
+                    defaultValue={currentlyReading}
                     onChange={(e) => {
                         setCurrentlyReading(e.target.value);
                     }}
