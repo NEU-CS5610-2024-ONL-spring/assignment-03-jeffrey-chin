@@ -10,12 +10,24 @@ function SearchResults({ results, query, isFetchingResults }) {
     const [addedBooks, setAddedBooks] = useState([]);
     const navigate = useNavigate();
     const location = useLocation();
+    const [isProcessing, setIsProcessing] = useState(false);
 
     useEffect(() => {
         if (userBooks && results.length > 0) {
             setAddedBooks(getAddedBooksByOLID(userBooks, results));
+            setIsProcessing(false);
         }
     }, [userBooks, results])
+
+    function handleRemoveFromLibrary(book) {
+        setIsProcessing(true);
+        deleteUserBook(addedBooks[getOLID(book.key)]);
+    }
+
+    function handleAddToLibrary(book) {
+        setIsProcessing(true);
+        addUserBook(book.title, joinAuthors(book.author_name), getCoverURL(book.cover_i), getOLID(book.key));
+    }
 
     return (
         <section className={location.pathname === "/search" ? "search-results-page" : "search-results"}>
@@ -25,10 +37,10 @@ function SearchResults({ results, query, isFetchingResults }) {
                     <li key={result.key}>
                         <BookResult book={result} />
                         {addedBooks && (addedBooks[getOLID(result.key)] ? // If the OLID of the result corresponds to a book in the user's added books (the user has added this book)
-                            <Button variant="danger" onClick={() => deleteUserBook(addedBooks[getOLID(result.key)])}>
+                            <Button variant="danger" onClick={() => handleRemoveFromLibrary(result)} disabled={isProcessing}>
                                 Remove from Library
                             </Button> :
-                            <Button onClick={() => addUserBook(result.title, joinAuthors(result.author_name), getCoverURL(result.cover_i), getOLID(result.key))}>
+                            <Button onClick={() => handleAddToLibrary(result)} disabled={isProcessing}>
                                 Add to Library
                             </Button>
                         )}

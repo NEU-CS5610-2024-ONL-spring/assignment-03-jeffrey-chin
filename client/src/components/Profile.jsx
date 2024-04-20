@@ -18,6 +18,7 @@ function BookItemView({ id, title, authors, coverImageURL, olid, rating }) {
     const [show, setShow] = useState(false);
     const [selectedRating, setSelectedRating] = useState(5);
     const { updateUserBook, deleteUserBook } = useUserBooks();
+    const [isProcessing, setIsProcessing] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -25,6 +26,11 @@ function BookItemView({ id, title, authors, coverImageURL, olid, rating }) {
         e.preventDefault();
         updateUserBook(id, selectedRating);
         setShow(false);
+    }
+
+    const handleDeleteUserBook = () => {
+        setIsProcessing(true);
+        deleteUserBook(id);
     }
 
     return (
@@ -50,7 +56,7 @@ function BookItemView({ id, title, authors, coverImageURL, olid, rating }) {
                 Details
             </Button>
 
-            <Button variant="outline-danger mt-2" onClick={() => deleteUserBook(id)}>
+            <Button variant="outline-danger mt-2" onClick={handleDeleteUserBook} disabled={isProcessing}>
                 Remove
             </Button>
 
@@ -93,15 +99,15 @@ function Profile() {
     const { userBooks } = useUserBooks();
     const { deleteUser } = useUser();
     const [showSearch, setShowSearch] = useState(false);
-    const [showDelete, setShowDelete] = useState(false);
+    const [showDeleteUser, setShowDeleteUser] = useState(false);
 
     const handleCloseSearch = () => setShowSearch(false);
     const handleShowSearch = () => setShowSearch(true);
 
-    const handleCloseDelete = () => setShowDelete(false);
-    const handleShowDelete = () => setShowDelete(true);
+    const handleCloseDeleteUser = () => setShowDeleteUser(false);
+    const handleShowDeleteUser = () => setShowDeleteUser(true);
 
-    const handleDelete = () => {
+    const handleDeleteUser = () => {
         logout({ returnTo: window.location.origin });
         deleteUser();
     }
@@ -132,7 +138,7 @@ function Profile() {
             <hr />
             <section>
                 <h2>Your account</h2>
-                <Button variant="danger mb-3" onClick={handleShowDelete}>
+                <Button variant="danger mb-3" onClick={handleShowDeleteUser}>
                     Delete account
                 </Button>
             </section>
@@ -146,7 +152,7 @@ function Profile() {
                 </Modal.Body>
             </Modal>
 
-            <Modal show={showDelete} onHide={handleCloseDelete}>
+            <Modal show={showDeleteUser} onHide={handleCloseDeleteUser}>
                 <Modal.Header closeButton>
                     <Modal.Title>Delete your account</Modal.Title>
                 </Modal.Header>
@@ -154,8 +160,8 @@ function Profile() {
                     Are you sure you wish to delete your account? Your library and all personal information will be deleted.
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleCloseDelete}>Cancel</Button>
-                    <Button onClick={handleDelete}>Delete</Button>
+                    <Button variant="secondary" onClick={handleCloseDeleteUser}>Cancel</Button>
+                    <Button onClick={handleDeleteUser}>Delete</Button>
                 </Modal.Footer>
             </Modal>
         </div>
