@@ -62,7 +62,7 @@ function BookDetails() {
     }, []);
 
     return (
-        <div>
+        <>
             <NavBar />
             <header>
                 <h2>Book Details</h2>
@@ -124,7 +124,7 @@ function BookDetails() {
                     </tbody>
                 </table>
             ) : isLoading ? <Loading message="Loading book details..." /> : <NotFound message={`Book with ID ${id} not found.`} />}
-        </div>
+        </>
     )
 }
 

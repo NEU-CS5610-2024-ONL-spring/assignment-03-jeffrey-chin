@@ -114,7 +114,7 @@ function Profile() {
     }
 
     return (
-        <div>
+        <>
             <NavBar />
             <header>
                 <h1>Profile</h1>
@@ -165,7 +165,7 @@ function Profile() {
                     <Button onClick={handleDeleteUser} disabled={isProcessing}>Delete</Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </>
     )
 }
 

@@ -49,13 +49,13 @@ export default function Home() {
   }, [])
 
   return (
-    <div>
+    <>
       <NavBar />
       <SearchBooks formLabel={<Form.Label htmlFor="search" className="home-search-label">Search for your favorite books</Form.Label>} />
       <UserBooksTable header={tableHeader} list={recentlyAddedBooks} tableIsLoading={tableIsLoading} />
       {componentLoaded && (
         <img src="library.jpg" alt="Library" className="background-image" />
       )}
-    </div>
+    </>
   );
 }

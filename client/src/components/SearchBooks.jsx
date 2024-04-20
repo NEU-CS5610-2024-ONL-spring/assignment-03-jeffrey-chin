@@ -109,11 +109,13 @@ function SearchBooks({ formLabel }) {
     }, []);
 
     return (
-        <div>
+        <>
             {location.pathname === "/search" && <NavBar /> /* Some uses of the SearchBooks component are contained within a Modal and do not need a NavBar */}
-            <SearchForm />
-            {query && (<SearchResults results={results} query={query} isFetchingResults={isFetchingResults} />)}
-        </div>
+            <main>
+                <SearchForm />
+                {query && (<SearchResults results={results} query={query} isFetchingResults={isFetchingResults} />)}
+            </main>
+        </>
     )
 }
 
