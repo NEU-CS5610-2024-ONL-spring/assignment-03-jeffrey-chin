@@ -45,9 +45,9 @@ function BookDetails() {
             }
         }
 
-        // Remove "subjects" that are not as readable:
         if (result["subject"]) { // Check if the subject field exists
-            result["subject"] = result["subject"].filter(subject => !(/OCoLC|open_syllabus_project|:/.test(subject)));
+            // Only keep subjects with letters, spaces, and common symbols:
+            result["subject"] = result["subject"].filter(subject => /^[a-zA-Z\s-'&()/,]+$/.test(subject));
         }
 
         return result;
@@ -119,7 +119,7 @@ function BookDetails() {
                         </tr>
                         <tr>
                             <td>Subject(s): </td>
-                            <td>{book.subject ? book.subject.join(", ") : "Unknown"}</td>
+                            <td>{(book.subject && book.subject.length > 0) ? book.subject.join(", ") : "Unknown"}</td>
                         </tr>
                     </tbody>
                 </table>
