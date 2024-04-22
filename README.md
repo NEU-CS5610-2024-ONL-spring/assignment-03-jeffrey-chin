@@ -9,6 +9,6 @@ LibraryApp is a React web app that allows users to search for millions of books 
 
 LibraryApp was designed with accessibility in mind, earning high Lighthouse ratings for all pages.
 
-Link: https://client-oo4qpzw5z-jeffreyrchins-projects.vercel.app
+[App link](https://client-jet-zeta.vercel.app)
 
-Vdeo demonstration: https://drive.google.com/file/d/1lm1VvKIP6e1EuWLk3dk2h9Fi4mPfLmnv/view?usp=sharing
+[Video demonstration](https://drive.google.com/file/d/1lm1VvKIP6e1EuWLk3dk2h9Fi4mPfLmnv/view?usp=sharing)
